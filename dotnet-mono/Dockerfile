@@ -8,7 +8,7 @@ MAINTAINER Tyler Young <tyler.young@cimplx.com>
 ENV PREFIX=/usr/local MONO_THREADS_PER_CPU=50
 
 RUN PATH=$PREFIX/bin:$PATH \
-    LIBUV_VERSION=1.4.2 \
+    LIBUV_VERSION=1.9.1 \
     && apt-get update \
     && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && apt-get install -qqy unzip patch git autoconf libtool libtool-bin automake build-essential gettext gawk parallel pandoc openssl dtrx python nodejs libc6 libc6-dev pkg-config libicu-dev \
