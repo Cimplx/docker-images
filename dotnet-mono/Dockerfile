@@ -10,14 +10,15 @@ ENV PREFIX=/usr/local MONO_THREADS_PER_CPU=50
 RUN PATH=$PREFIX/bin:$PATH \
     LIBUV_VERSION=1.9.1 \
     && apt-get update \
-    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get install -qqy unzip patch git autoconf libtool libtool-bin automake build-essential gettext gawk parallel pandoc openssl dtrx python nodejs libc6 libc6-dev pkg-config libicu-dev \
+    && apt-get install -qqy unzip patch git autoconf libtool libtool-bin automake build-essential gettext gawk parallel pandoc openssl dtrx python libc6 libc6-dev pkg-config libicu-dev \
     && curl -sSL https://github.com/libuv/libuv/archive/v${LIBUV_VERSION}.tar.gz | tar zxfv - -C /usr/local/src \
     && cd /usr/local/src/libuv-$LIBUV_VERSION \
     && sh autogen.sh && ./configure && make && make install \
     && cd .. \
     && rm -rf libuv-$LIBUV_VERSION \
     && ldconfig \
+    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -qqy nodejs \
     && npm install npm -g \
     && npm install gulp gulp-sass gulp-concat gulp-clean-css uglify-js jshint gulp-rename gulp-imagemin gulp-autoprefixer grunt-cli bower browserify moment request socket.io ws chalk -g \
     && cd /usr/local/src \
