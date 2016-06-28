@@ -6,7 +6,7 @@ MAINTAINER Tyler Young <tyler.young@cimplx.com>
 # uses dotnet build -h to trigger initial package cache
 
 
-COPY nuget /usr/local/bin
+COPY nuget /usr/local/bin/
 
 ENV PREFIX=/usr/local MONO_THREADS_PER_CPU=50
 
