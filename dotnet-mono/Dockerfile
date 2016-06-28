@@ -5,6 +5,9 @@ MAINTAINER Tyler Young <tyler.young@cimplx.com>
 # https://github.com/mono/mono/pull/2771 by manuel-sugawara in mar 2016; original author spouliot in sep 2005
 # uses dotnet build -h to trigger initial package cache
 
+
+COPY nuget /usr/local/bin
+
 ENV PREFIX=/usr/local MONO_THREADS_PER_CPU=50
 
 RUN PATH=$PREFIX/bin:$PATH \
@@ -34,8 +37,6 @@ RUN PATH=$PREFIX/bin:$PATH \
     && rm -rf mono \
     && cd ~/ \
     && wget -O ~/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -nv \
-    && alias nuget="mono ~/nuget.exe" \
-    && ( echo alias nuget="mono ~/nuget.exe" >> ~/.profile ) \
     && wget --max-redirect 0 -O certdata.txt https://hg.mozilla.org/mozilla-central/raw-file/tip/security/nss/lib/ckfw/builtins/certdata.txt -nv \
     && mozroots --import --machine --sync --file certdata.txt \
     && rm -f certdata.txt \
@@ -44,5 +45,5 @@ RUN PATH=$PREFIX/bin:$PATH \
     && ( dotnet build -h > /dev/null ) \
     && apt-get -y autoremove \
     && apt-get -y clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && chmod 755 /usr/local/bin/nuget
