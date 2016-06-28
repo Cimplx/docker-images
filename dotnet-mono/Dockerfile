@@ -32,7 +32,8 @@ RUN PATH=$PREFIX/bin:$PATH \
     && rm -rf mono \
     && cd ~/ \
     && wget -O ~/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -nv \
-    && ( alias nuget="mono ~/nuget.exe" >> ~/.profile ) \
+    && alias nuget="mono ~/nuget.exe" \
+    && ( echo alias nuget="mono ~/nuget.exe" >> ~/.profile ) \
     && wget --max-redirect 0 -O certdata.txt https://hg.mozilla.org/mozilla-central/raw-file/tip/security/nss/lib/ckfw/builtins/certdata.txt -nv \
     && mozroots --import --machine --sync --file certdata.txt \
     && rm -f certdata.txt \
