@@ -5,14 +5,13 @@ MAINTAINER Tyler Young <tyler.young@cimplx.com>
 # https://github.com/mono/mono/pull/2771 by manuel-sugawara in mar 2016; original author spouliot in sep 2005
 # uses dotnet build -h to trigger initial package cache
 
-ENV PREFIX=/usr/local
-ENV MONO_THREADS_PER_CPU 50
+ENV PREFIX=/usr/local MONO_THREADS_PER_CPU 50
 
 RUN PATH=$PREFIX/bin:$PATH \
     LIBUV_VERSION=1.4.2 \
     && apt-get update \
     && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-	&& apt-get install -qqy unzip patch git autoconf libtool libtool-bin automake build-essential gettext gawk parallel pandoc openssl dtrx python nodejs libc6-dev libicu-dev autoconf automake build-essential libtool \
+    && apt-get install -qqy unzip patch git autoconf libtool libtool-bin automake build-essential gettext gawk parallel pandoc openssl dtrx python nodejs libc6-dev libicu-dev autoconf automake build-essential libtool \
     && curl -sSL https://github.com/libuv/libuv/archive/v${LIBUV_VERSION}.tar.gz | tar zxfv - -C /usr/local/src \
     && cd /usr/local/src/libuv-$LIBUV_VERSION \
     && sh autogen.sh && ./configure && make && make install \
