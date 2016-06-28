@@ -15,7 +15,8 @@ RUN PATH=$PREFIX/bin:$PATH \
     && curl -sSL https://github.com/libuv/libuv/archive/v${LIBUV_VERSION}.tar.gz | tar zxfv - -C /usr/local/src \
     && cd /usr/local/src/libuv-$LIBUV_VERSION \
     && sh autogen.sh && ./configure && make && make install \
-    && rm -rf /usr/local/src/libuv-$LIBUV_VERSION \
+    && cd .. \
+    && rm -rf libuv-$LIBUV_VERSION \
     && ldconfig \
     && npm install npm -g \
     && npm install gulp gulp-sass gulp-concat gulp-minify-css uglify-js jshint gulp-rename gulp-imagemin gulp-autoprefixer grunt-cli bower browserify moment request socket.io ws chalk -g \
