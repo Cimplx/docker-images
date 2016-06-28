@@ -5,7 +5,7 @@ MAINTAINER Tyler Young <tyler.young@cimplx.com>
 # https://github.com/mono/mono/pull/2771 by manuel-sugawara in mar 2016; original author spouliot in sep 2005
 # uses dotnet build -h to trigger initial package cache
 
-ENV PREFIX=/usr/local MONO_THREADS_PER_CPU 50
+ENV PREFIX=/usr/local MONO_THREADS_PER_CPU=50
 
 RUN PATH=$PREFIX/bin:$PATH \
     LIBUV_VERSION=1.4.2 \
