@@ -11,7 +11,7 @@ RUN PATH=$PREFIX/bin:$PATH \
     LIBUV_VERSION=1.4.2 \
     && apt-get update \
     && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-    && apt-get install -qqy unzip patch git autoconf libtool libtool-bin automake build-essential gettext gawk parallel pandoc openssl dtrx python nodejs libc6-dev libicu-dev autoconf automake build-essential libtool \
+    && apt-get install -qqy unzip patch git autoconf libtool libtool-bin automake build-essential gettext gawk parallel pandoc openssl dtrx python nodejs libc6-dev libicu-dev \
     && curl -sSL https://github.com/libuv/libuv/archive/v${LIBUV_VERSION}.tar.gz | tar zxfv - -C /usr/local/src \
     && cd /usr/local/src/libuv-$LIBUV_VERSION \
     && sh autogen.sh && ./configure && make && make install \
@@ -39,7 +39,6 @@ RUN PATH=$PREFIX/bin:$PATH \
     && ( yes | certmgr -ssl -m https://api.nuget.org ) \
     && ( yes | certmgr -ssl -m https://www.myget.org ) \
     && ( dotnet build -h > /dev/null ) \
-    && apt-get -y purge unzip patch autoconf automake build-essential libtool libtool-bin \
     && apt-get -y autoremove \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
