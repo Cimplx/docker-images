@@ -18,8 +18,8 @@ RUN PATH=$PREFIX/bin:$PATH \
     && sh autogen.sh && ./configure && make && make install \
     && rm -rf /usr/local/src/libuv-$LIBUV_VERSION \
     && ldconfig \
-	&& npm install npm -g \
-	&& npm install gulp gulp-sass gulp-concat gulp-minify-css uglify-js jshint gulp-rename gulp-imagemin gulp-autoprefixer grunt-cli bower browserify moment request socket.io ws chalk -g \
+    && npm install npm -g \
+    && npm install gulp gulp-sass gulp-concat gulp-minify-css uglify-js jshint gulp-rename gulp-imagemin gulp-autoprefixer grunt-cli bower browserify moment request socket.io ws chalk -g \
     && cd /usr/local/src \
     && git clone --recursive https://github.com/mono/mono.git \
     && cd mono \
