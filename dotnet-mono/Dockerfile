@@ -3,12 +3,11 @@ MAINTAINER Tyler Young <tyler.young@cimplx.com>
 
 # Base in concept on 2020ip/dotnet-mono by Jarrod Alexander <jarroda@2020research.com>
 # https://github.com/mono/mono/pull/2771 by manuel-sugawara in mar 2016; original author spouliot in sep 2005
-# uses dotnet build -h to trigger initial package cache
-
+# uses dotnet new -t console -l cs to trigger initial package cache https://github.com/dotnet/cli/issues/3692 
 
 COPY nuget /usr/local/bin/
 
-ENV PREFIX=/usr/local MONO_THREADS_PER_CPU=50
+ENV PREFIX=/usr/local MONO_THREADS_PER_CPU=50 DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 RUN PATH=$PREFIX/bin:$PATH \
     LIBUV_VERSION=1.9.1 \
@@ -42,7 +41,8 @@ RUN PATH=$PREFIX/bin:$PATH \
     && rm -f certdata.txt \
     && ( yes | certmgr -ssl -m https://api.nuget.org ) \
     && ( yes | certmgr -ssl -m https://www.myget.org ) \
-    && ( dotnet build -h > /dev/null ) \
+    && dotnet new -t console -l cs \
+    && rm Program.cs && rm project.json \
     && apt-get -y autoremove \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
