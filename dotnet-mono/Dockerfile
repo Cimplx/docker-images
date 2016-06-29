@@ -41,8 +41,11 @@ RUN PATH=$PREFIX/bin:$PATH \
     && rm -f certdata.txt \
     && ( yes | certmgr -ssl -m https://api.nuget.org ) \
     && ( yes | certmgr -ssl -m https://www.myget.org ) \
+    && mkdir dotnetinit \
+    && cd dotnetinit \
     && dotnet new -t console -l cs \
-    && rm Program.cs && rm project.json \
+    && cd .. \
+    && rm -rf dotnetinit \
     && apt-get -y autoremove \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
